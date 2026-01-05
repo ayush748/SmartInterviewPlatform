@@ -1,34 +1,35 @@
+"use client";
+
 import Link from "next/link";
-import { ModeToggle } from "./ModeToggle";
 import { CodeIcon } from "lucide-react";
 import { SignedIn, UserButton } from "@clerk/nextjs";
+import { ModeToggle } from "./ModeToggle";
 import DasboardBtn from "./DasboardBtn";
 
-function Navbar() {
+export default function Navbar() {
   return (
     <nav className="border-b">
-      <div className="flex h-16 items-center px-4 container mx-auto">
-        {/* LEFT SIDE -LOGO */}
+      <div className="container mx-auto flex h-16 items-center px-4">
+        {/* LOGO */}
         <Link
           href="/"
-          className="flex items-center gap-2 font-semibold text-2xl mr-6 font-mono hover:opacity-80 transition-opacity"
+          className="flex items-center gap-2 font-mono text-2xl font-semibold hover:opacity-80 transition-opacity"
         >
-          <CodeIcon className="size-8 text-emerald-500" />
-          <span className="bg-gradient-to-red from-emerald-600 to-teal-500 bg-clip-text text-transparent">
+          <CodeIcon className="h-8 w-8 text-emerald-500" />
+          <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
             CodeSync
           </span>
         </Link>
 
-        {/* RIGHT SIDE - ACTIONS */}
+        {/* ACTIONS */}
         <SignedIn>
-          <div className="flex items-center space-x-4 ml-auto">
+          <div className="ml-auto flex items-center gap-4">
             <DasboardBtn />
             <ModeToggle />
-            <UserButton />
+            <UserButton afterSignOutUrl="/sign-in" />
           </div>
         </SignedIn>
       </div>
     </nav>
   );
 }
-export default Navbar;

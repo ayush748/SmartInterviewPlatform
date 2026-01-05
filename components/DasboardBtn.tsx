@@ -1,22 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "./ui/button";
-import { SparklesIcon } from "lucide-react";
-import { useUserRole } from "@/hooks/useUserRole";
+import { usePathname } from "next/navigation";
+import { LayoutDashboard } from "lucide-react";
 
-function DasboardBtn() {
-  const { isCandidate, isLoading } = useUserRole();
+export default function DasboardBtn() {
+  const pathname = usePathname();
 
-  if (isCandidate || isLoading) return null;
+  // Hide button on dashboard page
+  if (pathname === "/dashboard") return null;
 
   return (
-    <Link href={"/dashboard"}>
-      <Button className="gap-2 font-medium" size={"sm"}>
-        <SparklesIcon className="size-4" />
-        Dashboard
-      </Button>
+    <Link
+      href="/dashboard"
+      className="flex items-center gap-2 rounded-md border px-3 py-2 text-sm font-medium hover:bg-muted transition"
+    >
+      <LayoutDashboard className="h-4 w-4" />
+      Dashboard
     </Link>
   );
 }
-export default DasboardBtn;
